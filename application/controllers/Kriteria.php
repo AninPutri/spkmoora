@@ -45,18 +45,9 @@ class Kriteria extends CI_Controller {
 			}
 			else
 			{
-				$kriteria_id = $this->kriteria_model->insertKriteriaBaru();
-
-				$data_alternatif = $this->alternatif_model->getDataAlternatif();
-
-				foreach ($data_alternatif as $key) {
-					$object = array(
-						'id_kriteria' => $kriteria_id,
-						'id_alternatif' => $key->id_alternatif,
-						'nilai' => 1,
-					);
-					$this->nilai_model->insertNilaiBaru($object);
-				}
+				
+				$this->kriteria_model->insertKriteriaBaru();
+				
 				
 				$this->load->view('partials/header');
 				echo '<script type="text/javascript">alert("Data Berhasil di ditambahkan!!")</script>';

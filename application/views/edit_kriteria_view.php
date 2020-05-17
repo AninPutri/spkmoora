@@ -21,7 +21,7 @@
                     <td width="2%"></td>
                     <td width="35%">
                         <select id="tipe" name="tipe">                      
-                              <option value="0">--Pilih Tipe--</option>
+                        <option selected> <?php echo $kriteria[0]->tipe ?></option>
                               <option value="Benefit">Benefit</option>
                               <option value="Cost">Cost</option>
                             </select>
