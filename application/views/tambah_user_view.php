@@ -25,7 +25,12 @@
                     <td align="right" width="13%"> Level</td>
                     <td width="2%"></td>
                     <td width="35%">
-                    <input class="form-control" id="new-pass-control" placeholder="Masukkan Level" name="level"  type="text" value="" >
+                    <select class="form-control" name ="level" id="level"> 
+                  <option selected> --Pilih Level User-- </option>
+                  <?php foreach ($user_level as $k) { ?>
+                  <option value="<?php echo $k->id_user_level?>"><?php echo $k->user_level?></option>
+                <?php } ?>
+                </select>
                     <span class="text-danger"><font color='red'><?php echo form_error('level'); ?></font></span>
                     </td>
                 </tr>

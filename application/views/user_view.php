@@ -70,7 +70,17 @@
                                         <td><?php echo $i++?></td>
                                         <td><?php echo $key->username?></td>
                                         <td><?php echo $key->nama?></td>
-                                        <td><?php echo $key->level?></td>
+                                        <td>
+                          <?php foreach ($user_level as $k)
+                          {
+                            if($k->id_user_level == $key->id_user_level)
+                            {?>
+                           
+                            <?php echo $k->user_level;
+                            }
+                          }
+                          ?>
+                        </td>
                                         <td>
                                          <div class="btn-group">
                                             <a href="<?php echo site_url('User/update/').$key->id ?>" class="btn btn-info"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>

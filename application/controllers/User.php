@@ -17,7 +17,8 @@ class User extends CI_Controller {
 
 		public function index()
 		{ 		
-			$object['user_object']=$this->user_model->getDataUser();
+			$object['user_object']=$this->user_model->get_user();
+			$object['user_level']= $this->user_model->user_level();
 			$this->load->view('partials/header');
 			$this->load->view('user_view',$object);
 			$this->load->view('partials/footer');
@@ -32,9 +33,9 @@ class User extends CI_Controller {
 		
 			if($this->form_validation->run()==FALSE)
 			{
-
+				$object['user_level']= $this->user_model->user_level();
 				$this->load->view('partials/header');
-				$this->load->view('tambah_user_view');
+				$this->load->view('tambah_user_view',$object);
 				$this->load->view('partials/footer');
 			}
 			else
@@ -54,6 +55,7 @@ class User extends CI_Controller {
 			
 			$this->load->model('user_model');
 			$data['user']=$this->user_model->getUser($id);
+			$data['user_level']= $this->user_model->user_level();
 
 			// var_dump($data);
 

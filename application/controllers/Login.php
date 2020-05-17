@@ -34,24 +34,24 @@ class Login extends CI_Controller{
 				$id = $row->id;
 				$username= $row->username;
 				$nama= $row->nama;
-				$level = $row->level;
+				$id_user_level = $row->id_user_level;
 			}
  
 			$newdata = array(
 			        'id'  => $id,
 			        'username' => $username,
 			        'nama' => $nama,
-			        'level' => $level,
-			        'logged_in' => TRUE
+			        'id_user_level' => $id_user_level,
+			        'status' => 'Logged'
 			);
 
 			var_dump($newdata);
 			
 			//set up session data
 			$this->session->set_userdata($newdata);
-			if($this->session->userdata('level')=='admin') {
+			if($this->session->userdata('id_user_level')=='1') {
 				redirect('Home');
-			}elseif ($this->session->userdata('level')=='pegawai') {
+			}elseif ($this->session->userdata('id_user_level')=='2') {
 				redirect('Home_member');
 			}
 			

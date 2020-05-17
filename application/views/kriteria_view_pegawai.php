@@ -59,7 +59,7 @@
                                         <th>Nama Kriteria</th>
                                         <th>Tipe</th>
                                         <th>Bobot</th>
-                                       <th width="10%"><center>Action</center></th>
+                                       <!-- <th width="10%"><center>Action</center></th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -71,12 +71,12 @@
                                         <td><?php echo $key->nama_kriteria ?></td>
                                         <td><?php echo $key->tipe ?></td>
                                         <td><?php echo $key->bobot ?></td>
-                                        <td>
+                                        <!-- <td>
                                          <div class="btn-group">
                                             <a href="<?php echo site_url('Kriteria/update/').$key->id_kriteria ?>" class="btn btn-info"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                                             <a href="<?php echo site_url('Kriteria/delete/').$key->id_kriteria ?>" class="btn btn-danger" onClick="return confirm('Apakah Anda Yakin?')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>   
                                          </div>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 <?php } ?>
                                 </tbody>

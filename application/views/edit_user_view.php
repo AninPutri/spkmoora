@@ -25,7 +25,19 @@
                     <td align="right" width="10%"> Level</td>
                     <td width="2%"></td>
                     <td width="35%">
-                        <input class="form-control" placeholder="Masukkan Level" name="level"  type="text" value="<?php echo $user[0]->level ?>" >
+                    <select class="form-control" name ="level" id="level"> 
+                <option selected>
+                <?php
+                  foreach($user_level as $k) {
+                    $s='';
+                      if($k->id_user_level == $user[0]->id_user_level)
+                      { $s='selected'; }
+                ?>
+                 <option value="<?php echo $k->id_user_level ?>" <?php echo $s ?>>
+                    <?php echo $k->user_level ?>
+                  </option>
+                  <?php } ?>
+            </select>
                         <span class="text-danger"><font color='red'><?php echo form_error('level'); ?></font></span>
                     </td>
                 </tr>

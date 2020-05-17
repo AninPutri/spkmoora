@@ -1,3 +1,9 @@
+<?php
+if($this->session->status !== ('Logged'))
+   {
+     redirect('login');
+    }
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -64,12 +70,7 @@
                         <p>Beranda</p>
                     </a>
                 </li>
-                <li>
-                        <a href="<?php echo site_url('User')?>">
-                            <i class="ti-user"></i>
-                            <p>User</p>
-                        </a>
-                    </li>
+               
                 <li>  <!-- class="active"> -->
                     <a href="<?php echo site_url('Kriteria_pegawai')?>">
                         <i class="ti-book"></i>
@@ -82,12 +83,12 @@
                         <p>Data Personel</p>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="<?php echo site_url('Nilai_member')?>">
                         <i class="ti-book"></i>
                         <p>Nilai Personel</p>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="<?php echo site_url('Perhitungan/Perhitungan')?>">
                         <i class="ti-book"></i>

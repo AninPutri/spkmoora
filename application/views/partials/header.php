@@ -1,3 +1,10 @@
+
+ <?php
+if($this->session->status !== ('Logged'))
+   {
+     redirect('login');
+    }
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -64,7 +71,7 @@
                         <p>Beranda</p>
                     </a>
                 </li>
-                <?php if($this->session->userdata('status') == 'admin'){ ?>
+                <?php if($this->session->userdata('id_user_level') == '1'){ ?>
                     <li>
                         <a href="<?php echo site_url('User')?>">
                             <i class="ti-user"></i>
