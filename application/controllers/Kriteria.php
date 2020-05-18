@@ -45,7 +45,7 @@ class Kriteria extends CI_Controller {
 			}
 			else
 			{
-				
+				helper_log("add", "menambahkan kriteria");
 				$this->kriteria_model->insertKriteriaBaru();
 				
 				
@@ -78,7 +78,7 @@ class Kriteria extends CI_Controller {
 			}
 			else
 			{
-			
+				helper_log("edit", "mengubah data kriteria");
 				$this->kriteria_model->UpdateById($kriteria);
 				$this->load->view('partials/header');
 				echo '<script type="text/javascript">alert("Data Berhasil di ubah!!")</script>';
@@ -97,6 +97,7 @@ class Kriteria extends CI_Controller {
 
 			foreach ($data_nilai as $key) {
 				$this->nilai_model->delete($key->id_nilai);
+				helper_log("delete", "menghapus data kriteria");
 			}
 
 			echo '<script type="text/javascript">alert("Data Berhasil di hapus!!")</script>';

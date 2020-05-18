@@ -49,6 +49,7 @@ class Login extends CI_Controller{
 			
 			//set up session data
 			$this->session->set_userdata($newdata);
+			helper_log("Login", "Login");
 			if($this->session->userdata('id_user_level')=='1') {
 				redirect('Home');
 			}elseif ($this->session->userdata('id_user_level')=='2') {

@@ -7,19 +7,19 @@
               
              
               <div class="form-group">
-                <label for="keterangan">Nama Personel</label>
+                <label >Nama Personel</label>
                 <select class="form-control" id="type" name="type" required>
                             <option value="">--Pilih Personel--</option>   
                              <?php foreach ($sekolah as $key) { ?>
                                 <option value="<?php echo $key->id_alternatif; ?>"><?php echo $key->nama_alternatif; ?></option>      
                             <?php } ?>                  
                         </select>
-                    <span class="text-danger"><font color='red'><?php echo form_error('sekolah'); ?></font></span>
+                    <span class="text-danger"><font color='red'><?php echo form_error('type', '<div class="Nlai Personel sudah ada">', '</div>'); ?></font></span>
               </div>
               <div class="form-group">
                 <label>Kriteria 1</label>
                 <select class="form-control" name ="kriteria1" id="kriteria1"> 
-                  <option selected> --Pilih Jenjang Pendidikan-- </option>
+                  <option value=""> --Pilih Jenjang Pendidikan-- </option>
                   <option value="100">S2</option>
                   <option value="80">S1</option>
                   <option value="60">SMA/Sederjat</option>
@@ -34,7 +34,7 @@
               <div class="form-group">
             <label> Kriteria 3 </label>
             <select class="form-control" name ="kriteria3" id="kriteria3"> 
-                  <option selected> --Pilih Nilai Kesehatan Fisik dan Mental-- </option>
+                  <option value=""> --Pilih Nilai Kesehatan Fisik dan Mental-- </option>
                   <option value="100">Sangat Sehat</option>
                   <option value="80">Sehat</option>
                   <option value="60">Cukup Sehat</option>
@@ -45,7 +45,7 @@
             <div class="form-group">
             <label> Kriteria 4 </label>
             <select class="form-control" name ="kriteria4" id="kriteria4"> 
-                  <option selected> --Pilih Nilai Perwira Berpangkat IPDA atau IPTU-- </option>
+                  <option value=""> --Pilih Nilai Perwira Berpangkat IPDA atau IPTU-- </option>
                   <option value="100">IPTU</option>
                   <option value="80">IPDA</option>
                 </select>

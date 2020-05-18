@@ -37,7 +37,7 @@ class Alternatif extends CI_Controller {
 			{
 				$last_data = $this->alternatif_model->GetLastData();
 				$last_id = $last_data->id_alternatif + 1;
-				
+				helper_log("add", "menambahkan personel baru");
 				$this->alternatif_model->insertAlternatifBaru($last_id);
 				$this->load->view('partials/header');
 				echo '<script type="text/javascript">alert("Data Berhasil di ditambahkan!!")</script>';
@@ -65,7 +65,7 @@ class Alternatif extends CI_Controller {
 			}
 			else
 			{
-			
+				helper_log("edit", "mengubah data personel");
 				$this->alternatif_model->UpdateById($id_alternatif);
 				$this->load->view('partials/header');
 				echo '<script type="text/javascript">alert("Data Berhasil di ubah!!")</script>';
@@ -78,6 +78,7 @@ class Alternatif extends CI_Controller {
 		public function delete($id_alternatif)
 		{
 			$this->load->view('partials/header');
+			helper_log("delete", "menghapus data personel");
 			$this->alternatif_model->delete($id_alternatif);
 			$this->nilai_model->deleteByAlternatif($id_alternatif);
 

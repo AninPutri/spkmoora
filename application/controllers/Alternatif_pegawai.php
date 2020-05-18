@@ -13,7 +13,7 @@ class Alternatif_pegawai extends CI_Controller {
 
 		public function index()
 		{ 		
-			$object['alternatif_object']=$this->alternatif_model->getDataAlternatif();
+			$object['alternatif_object']=$this->alternatif_model->getDataAlternatifByUser();
 			$this->load->view('partials/headermember');
 			$this->load->view('alternatif_view_pegawai',$object);
 			$this->load->view('partials/footer');

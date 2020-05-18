@@ -37,7 +37,6 @@ class alternatif_model extends CI_Model
 		$this->db->select('alternatif.id_alternatif,nama_alternatif,user.nama');
 		$this->db->join('user','user.id = alternatif.id_user');
 		$this->db->order_by("id_alternatif","asc");
-		$this->db->where('alternatif.id_user',$this->session->userdata('id'));
 		$query = $this->db->get('alternatif');
 		return $query->result();
 	}
@@ -76,6 +75,11 @@ class alternatif_model extends CI_Model
 		$this->db->where('id_alternatif', $id_alternatif);
 		$this->db->delete('alternatif');
 	}
+	public function get_alternatif()
+        {
+            $query = $this->db->get('alternatif');
+            return $query->result();
+        }
 
 	// public function getTabelAlternatif()
 	// {

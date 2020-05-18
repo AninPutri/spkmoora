@@ -40,6 +40,7 @@ class User extends CI_Controller {
 			}
 			else
 			{
+				helper_log("add", "menambahkan user");
 				$this->user_model->insertUserBaru();
 				$this->load->view('partials/header');
 				echo '<script type="text/javascript">alert("Data Berhasil di ditambahkan!!")</script>';
@@ -69,6 +70,7 @@ class User extends CI_Controller {
 			else
 			{
 			
+				helper_log("edit", "mengubah data user");
 				$this->user_model->UpdateById($id);
 				$this->load->view('partials/header');
 				echo '<script type="text/javascript">alert("Data Berhasil di ubah!!")</script>';
@@ -81,6 +83,7 @@ class User extends CI_Controller {
 		public function delete($id)
 		{
 			$this->load->view('partials/header');
+			helper_log("delete", "menghapus data user");
 			$this->user_model->delete($id);
 			echo '<script type="text/javascript">alert("Data Berhasil di hapus!!")</script>';
 					redirect('User', 'refresh');

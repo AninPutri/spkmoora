@@ -20,7 +20,7 @@
                     <td align="right" width="13%"> Tipe</td>
                     <td width="2%"></td>
                     <td width="35%">
-                        <select id="tipe" name="tipe">                      
+                        <select class="form-control"id="tipe" name="tipe">                      
                               <option value="0">--Pilih Tipe--</option>
                               <option value="Benefit">Benefit</option>
                               <option value="Cost">Cost</option>

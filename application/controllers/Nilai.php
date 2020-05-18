@@ -65,14 +65,16 @@ class Nilai extends CI_Controller {
 			$this->form_validation->set_rules('kriteria7','kriteria7','trim|required');
 			$this->form_validation->set_rules('kriteria8','kriteria8','trim|required');
 			$this->load->model('nilai_model');
-		
+			
+
 			if($this->form_validation->run()==FALSE)
 			{
-
+				
 				$data = array('sekolah' => $this->alternatif_model->getDataAlternatif());
 				$this->load->view('partials/header');
 				$this->load->view('tambah_nilai_view',$data);
 				$this->load->view('partials/footer');
+				//echo '<script type="text/javascript">alert("Nilai Personel Sudah Ada!!")</script>';
 			}
 			else
 			{
@@ -87,6 +89,7 @@ class Nilai extends CI_Controller {
 					// var_dump($object);
 					$this->nilai_model->insertNilaiBaru($object);	
 				}
+				helper_log("add", "menambahkan nilai pada personel id-".$this->input->post('type'));
 				$this->load->view('partials/header');
 				echo '<script type="text/javascript">alert("Data Berhasil di ditambahkan!!")</script>';
 				redirect('Nilai', 'refresh');
@@ -119,6 +122,7 @@ class Nilai extends CI_Controller {
 			{
 			
 				$this->nilai_model->UpdateById($id_nilai);
+				helper_log("edit", "mengubah data nilai personel id-".$id_aletrnatif);
 				$this->load->view('partials/header');
 				echo '<script type="text/javascript">alert("Data Berhasil di ubah!!")</script>';
 					redirect('Nilai/detail/'.$id_aletrnatif, 'refresh');
@@ -130,6 +134,7 @@ class Nilai extends CI_Controller {
 		public function delete($id_nilai)
 		{
 			$this->load->view('partials/header');
+			helper_log("delete", "menghapus data nilai");
 			$this->nilai_model->delete($id_nilai);
 			echo '<script type="text/javascript">alert("Data Berhasil di hapus!!")</script>';
 					redirect('Nilai', 'refresh');
@@ -138,6 +143,7 @@ class Nilai extends CI_Controller {
 		public function delete_alternatif($id_aletrnatif)
 		{
 			$this->load->view('partials/header');
+			helper_log("delete", "menghapus data nilai dari personel id-".$id_aletrnatif);
 			$this->nilai_model->deleteByAlternatif($id_aletrnatif);
 			echo '<script type="text/javascript">alert("Data Berhasil di hapus!!")</script>';
 					redirect('Nilai', 'refresh');
