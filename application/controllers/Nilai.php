@@ -15,7 +15,8 @@ class Nilai extends CI_Controller {
 
 		public function index()
 		{ 		
-			$object['nilai_object']=$this->alternatif_model->getDataAlternatifByUser();
+			$object['alternatif']=$this->alternatif_model->getDataAlternatifByUser();
+			$object['nilai_object']=$this->nilai_model->get_alternatif_from_nilai();
 			$this->load->view('partials/header');
 			$this->load->view('nilai_vieww',$object);
 			$this->load->view('partials/footer');
@@ -54,6 +55,7 @@ class Nilai extends CI_Controller {
 		{
 			$this->load->helper('url','form');
 			$this->load->library('form_validation');
+			$this->form_validation->set_rules('type','Type','required|is_unique[nilai.id_alternatif]');
 			$this->form_validation->set_rules('kriteria1','kriteria1','trim|required');
 			$this->form_validation->set_rules('kriteria2','kriteria2','trim|required');
 			$this->form_validation->set_rules('kriteria3','kriteria3','trim|required');
@@ -99,8 +101,12 @@ class Nilai extends CI_Controller {
 			
 			$this->load->model('nilai_model');
 			$data['nilai']=$this->nilai_model->getNilai($id_nilai);
+			$aletrnatif=$this->nilai_model->getNilai($id_nilai);
+			foreach($aletrnatif as $key){
+				$id_aletrnatif = $key->id_alternatif;
+			}
 
-			// var_dump($data);
+			//echo var_dump($id_aletrnatif);
 
 			if ($this->form_validation->run()==FALSE) 
 			{
@@ -115,7 +121,7 @@ class Nilai extends CI_Controller {
 				$this->nilai_model->UpdateById($id_nilai);
 				$this->load->view('partials/header');
 				echo '<script type="text/javascript">alert("Data Berhasil di ubah!!")</script>';
-					redirect('Nilai', 'refresh');
+					redirect('Nilai/detail/'.$id_aletrnatif, 'refresh');
 				
 			}
 
@@ -129,7 +135,14 @@ class Nilai extends CI_Controller {
 					redirect('Nilai', 'refresh');
 			
 		}
-
+		public function delete_alternatif($id_aletrnatif)
+		{
+			$this->load->view('partials/header');
+			$this->nilai_model->deleteByAlternatif($id_aletrnatif);
+			echo '<script type="text/javascript">alert("Data Berhasil di hapus!!")</script>';
+					redirect('Nilai', 'refresh');
+			
+		}
 		
 
 	

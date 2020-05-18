@@ -14,12 +14,12 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
+                        <!-- <li>
                             <a href="<?php echo site_url()?>/Nilai/create">
                                 <i class="ti-plus"></i>
                                 <p><font color='black'> &nbsp Tambah Data</font></p>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="<?php echo site_url()?>/Nilai/index">
                                 <i class="ti-layers-alt"></i>

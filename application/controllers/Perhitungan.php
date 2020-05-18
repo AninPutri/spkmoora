@@ -16,7 +16,7 @@ class Perhitungan extends CI_Controller {
 		{ 		
 			
 			$this->load->view('partials/header');
-			// $this->load->view('perhitungan_view');
+			$this->load->view('perhitungan_view');
 			$this->load->view('partials/footer');
 		}
 

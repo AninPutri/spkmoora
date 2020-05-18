@@ -14,12 +14,11 @@ class nilai_model extends CI_Model
 		$this->db->insert('nilai',$data);
 	}
 
-	// public function getNilaiAlter()
-	// {
-	// 	$this->db->order_by("id_alternatif","asc");
-	// 	$query = $this->db->get('nilai');
-	// 	return $query->result();
-	// }
+	public function get_penilaian()
+        {
+            $query = $this->db->get('nilai');
+            return $query->result();
+        }
 
 	public function getDataNilai()
 	{
@@ -94,6 +93,14 @@ class nilai_model extends CI_Model
 		$this->db->where('id_alternatif', $alternatif);
 		$this->db->delete('nilai');
 	}
+
+	public function get_alternatif_from_nilai()
+        {
+            $query = $this->db->query("SELECT DISTINCT id_alternatif FROM nilai ;");
+            return $query->result();
+		}
+		
+	
 	// public function getTabelSample()
 	// {
 	// 	$dbhost = 'localhost';

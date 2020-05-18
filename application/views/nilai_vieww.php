@@ -14,18 +14,19 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
+                    <li>
+                            <a href="<?php echo site_url()?>/Nilai/create">
+                                <i class="ti-plus"></i>
+                                <p><font color='black'> &nbsp Tambah Data</font></p>
+                            </a>
+                        </li>
                         <li>
                             <a href="<?php echo site_url()?>/Nilai/printPdf" _target="blank">
                                 <i class="ti-layers"></i>
                                 <p><font color='black'> &nbsp Cetak Data</font></p>
                             </a>
                         </li>
-                        <li>
-                            <a href="<?php echo site_url()?>/Nilai/create">
-                                <i class="ti-plus"></i>
-                                <p><font color='black'> &nbsp Tambah Data</font></p>
-                            </a>
-                        </li>
+                        
                         <li>
                             <a href="<?php echo site_url()?>/Nilai/index">
                                 <i class="ti-layers-alt"></i>
@@ -73,11 +74,22 @@
             <?php if(!empty($nilai_object)){ $i=1;
             foreach ($nilai_object as $key) { ?>
             <tr>
-                <td><?php echo $key->nama_alternatif?></td>
+                <td>
+                <?php foreach ($alternatif as $k)
+                          {
+                            if($k->id_alternatif == $key->id_alternatif)
+                            {?>
+                           
+                            <?php echo $k->nama_alternatif;
+                            }
+                          }
+                          ?>
+                </td>
             <td>
              <div class="btn-group">
 
-             <a href="<?php echo site_url('Nilai/detail/').$key->id_alternatif ?>" class="btn btn-info"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>                               
+             <a href="<?php echo site_url('Nilai/detail/').$key->id_alternatif ?>" class="btn btn-info"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>  
+             <a href="<?php echo site_url('Nilai/delete_alternatif/').$key->id_alternatif ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>                             
              <a href="<?php echo site_url('Nilai/printPdfByid/').$key->id_alternatif ?>" class="btn btn-warning" target="_blank"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a>
               
 

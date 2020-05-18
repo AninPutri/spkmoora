@@ -98,7 +98,7 @@ if($this->session->status !== ('Logged'))
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo site_url('Perhitungan/Perhitungan')?>">
+                    <a href="<?php echo site_url('Perhitungan')?>">
                         <i class="ti-book"></i>
                         <p>Perhitungan Metode</p>
                     </a>
