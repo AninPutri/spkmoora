@@ -4,23 +4,31 @@ class Cetak_laporan extends CI_Controller{
 
 	public function __construct(){ 
 		parent:: __construct();
-		$this->load->model('cetak_laporan');
-		$this->load->helper('file');
+		$this->load->model('kriteria_model');
+		$this->load->model('alternatif_model');
+		$this->load->helper('file','url');
 	
 	}
 
-	public function index(){
+	// 
+	public function cetak_kriteria(){
 		
-		$data['']=$this->cetak_laporan->view_row();
-		$this->load->view('cetak_laporan', $data);
+		$object['kriteria_object']=$this->kriteria_model->getDataKriteria();
+
+		$this->load->library('pdf');
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->filename = "laporan_kriteria.pdf";
+		$this->pdf->load_view('pdf_view_kriteria', $object);
+	}
+	public function cetak_alternatif(){
+		$object['alternatif_object']=$this->alternatif_model->getDataAlternatifByUser();
+
+		$this->load->library('pdf');
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->filename = "laporan_kriteria.pdf";
+		$this->pdf->load_view('pdf_view_alternatif', $object);
 	}
 
-	public function cetakPdf(){
-		$data['']=$this->cetak_laporan->view_row();
-		$this->load->view('cetak_laporan', $data);
-		$paper_size = 'A4';
-		$orientation = 'landscape';
-		$html = $this->output->get_output();
-	}
+
 
 }

@@ -81,25 +81,25 @@ if($this->session->status !== ('Logged'))
                 <?php } ?>
                 <li>  <!-- class="active"> -->
                     <a href="<?php echo site_url('Kriteria')?>">
-                        <i class="ti-book"></i>
+                        <i class="ti-list"></i>
                         <p>Data Kriteria </p>
                     </a>
                 </li>
                  <li>
                     <a href="<?php echo site_url('Alternatif')?>">
-                        <i class="ti-book"></i>
+                        <i class="ti-shield"></i>
                         <p>Data Personel</p>
                     </a>
                 </li>
                 <li>
                     <a href="<?php echo site_url('Nilai')?>">
-                        <i class="ti-book"></i>
+                        <i class="ti-bar-chart-alt"></i>
                         <p>Nilai Personel</p>
                     </a>
                 </li>
                 <li>
                     <a href="<?php echo site_url('Perhitungan')?>">
-                        <i class="ti-book"></i>
+                        <i class="ti-ruler-pencil"></i>
                         <p>Perhitungan Metode</p>
                     </a>
                 </li>

@@ -73,13 +73,13 @@ if($this->session->status !== ('Logged'))
                
                 <li>  <!-- class="active"> -->
                     <a href="<?php echo site_url('Kriteria_pegawai')?>">
-                        <i class="ti-book"></i>
+                        <i class="ti-list"></i>
                         <p>Data Kriteria </p>
                     </a>
                 </li>
                  <li>
                     <a href="<?php echo site_url('Alternatif_pegawai')?>">
-                        <i class="ti-book"></i>
+                        <i class="ti-shield"></i>
                         <p>Data Personel</p>
                     </a>
                 </li>
@@ -90,8 +90,8 @@ if($this->session->status !== ('Logged'))
                     </a>
                 </li> -->
                 <li>
-                    <a href="<?php echo site_url('Perhitungan/Perhitungan')?>">
-                        <i class="ti-book"></i>
+                    <a href="<?php echo site_url('Perhitungan')?>">
+                        <i class="ti-ruler-pencil"></i>
                         <p>Perhitungan Metode</p>
                     </a>
                 </li>

@@ -26,7 +26,7 @@
                             </a>                        
                         </li>
                             <li>
-                                <a href="<?php echo site_url() ?>/Cetak">
+                                <a href="<?php echo site_url() ?>/Cetak_laporan/cetak_alternatif">
                                 <i class="ti-layers-alt"></i>
                                 <p><font color='black'> &nbsp Cetak Data</font></p>
                                 
