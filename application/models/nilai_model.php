@@ -132,5 +132,7 @@ class nilai_model extends CI_Model
 	// 	return $sample;
 	// }
 
+	
+
 }
 ?>

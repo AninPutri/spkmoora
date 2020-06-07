@@ -5,44 +5,123 @@
 	<div class="panel panel-default">
 	  <div class="panel-heading"><B>PERHITUNGAN</B></div>
 	  <div class="panel-body">
-	  	<h2>Normalisasi</h2>
+	  	<h2>Penilaian</h2>
 	  	<table border="1" width="100%">
 	  		<tr>
-	  			<td rowspan="2">Kriteria</td>
-	  			<td colspan="<?php echo count($alternatif)?>">Alternatif</td>
+			  <th>Alternatif</th>
+              <?php foreach ($kriteria as $key): ?>
+                <th>C<?= $key->id_kriteria ?></th>
+              <?php endforeach ?>
 	  		</tr>
-	  		<tr>
-	  			<?php for ($i=1; $i <= count($alternatif); $i++) { ?>
-            <td><?php echo $alternatif[$i][0]; ?></td>
-          <?php } ?>
-	  		</tr>
-	  		<?php
-	  		for ($i=1; $i <= count($normalisasi[1]); $i++) { ?> 
-	  		<tr>
-	  			<td><?php echo $alternatif[1][$i]; ?></td>
-	  			<?php for ($z=1; $z <= count($alternatif); $z++) { ?>
-	  				<td><?php if(!empty($normalisasi[$z][$i])){echo $normalisasi[$z][$i];}else{echo '0';} ?></td>
-  				<?php } ?>
-  			</tr>
-  			<?php } ?>
+	  		<?php if ($alternatif==NULL): ?>
+              <tr>
+                <td class="text-center" colspan="<?= 2+count($kriteria)  ?>">Silahkan lengkapi data di halaman <a href="<?= base_url('alternatif') ?>" class="text-black"><u>Data.</u></a></td>
+              </tr>
+            <?php endif ?>
+
+            <?php foreach ($alternatif as $keys): ?>
+              <tr>
+                <td><?= $keys->nama_alternatif ?></td>
+                <?php foreach ($kriteria as $key): ?>
+                  <td>
+                    <?php 
+                      $data_pencocokan = $this->perhitungan_model->data_nilai($keys->id_alternatif,$key->id_kriteria);
+                    
+                      echo $data_pencocokan['nilai'];
+                      
+                    ?>
+                  </td>
+                <?php endforeach ?>
+
+               
+
+                
+              </tr>
+             
+            <?php endforeach ?>
 	  	</table>
 
 	  	<hr>
-	  	<h2>Optimasi</h2>
+	  	<h2>Normalisasi</h2>
 	  	<table border="1">
 	  		<tr>
 	  			<td>Alternatif</td>
-	  			<td>Optimasi</td>
+				  <?php foreach ($kriteria as $key): ?>
+                <th>C<?= $key->id_kriteria ?></th>
+              <?php endforeach ?>
 	  		</tr>
-	  		<?php $rank = array();for ($i=1; $i <= count($alternatif); $i++) {?>
+			  <?php foreach ($alternatif as $keys): ?>
+          <tr>
+                <td><?= $keys->nama_alternatif ?></td>
+                <?php foreach ($kriteria as $key): ?>
+                  <td>
+                    <?php 
+                      $data_pencocokan = $this->perhitungan_model->data_nilai($keys->id_alternatif,$key->id_kriteria);
+                    
+                      $pembagi=$this->perhitungan_model->nilai_pembagi($key->id_kriteria);
+                      
+                      $normalisasi=round($data_pencocokan['nilai']/$pembagi['pembagi'],3);
+                        echo $normalisasi;
+                      
+                    ?>
+                  </td>
+                <?php endforeach ?>
+
+               
+              </tr>
+            <?php endforeach ?>
+	  	</table>
+		  <h2>Optimasi</h2>
+	  	<table border="1">
 	  		<tr>
-	  			<td><?php echo $alternatif[$i][0]; ?></td>
-	  			<td><?php echo $optimasi[$i]; ?></td>
+			  <th>Alternatif</th>
+              <th>max(C1+C2+C3+C4+C6)</th>
+              <th>min(C5+C7+C8)</th>
+              <th>Yi = max - min</th>
 	  		</tr>
-              <?php 
-            $dtmp = array('alternatif' => $alternatif[$i][0],'optimasi' => $optimasi[$i]);
-            array_push($rank,$dtmp);
-        } ?>
+			  <?php foreach ($alternatif as $keys): ?>
+          <tr>
+                <td><?= $keys->nama_alternatif ?></td>
+                <?php 
+                $max=0;
+                $min=0;
+                foreach ($kriteria as $key): ?>
+                  
+                    <?php 
+                    $data_pencocokan = $this->perhitungan_model->data_nilai($keys->id_alternatif,$key->id_kriteria);
+                    $pembagi=$this->perhitungan_model->nilai_pembagi($key->id_kriteria);
+                    $pembobotan=$this->perhitungan_model->pembobotan($key->id_kriteria);
+
+                      if($pembobotan['tipe']==='Benefit'){
+                          
+                          $max += round($data_pencocokan['nilai']/$pembagi['pembagi']*$pembobotan['bobot'],5);
+                          
+                        // $max[]=$key->id_kriteria;
+                      }else{
+                         
+                          $min += round($data_pencocokan['nilai']/$pembagi['pembagi']*$pembobotan['bobot'],5);
+                        // $min[]=$key->id_kriteria;
+                      }
+                    
+                      $yi=$max-$min;
+                      
+                      //echo var_dump($min);
+                    ?>
+                    
+                    <?php endforeach ;?>
+                      <?php $optimasi[]=$yi; 
+                      $optim[]=$yi;
+                      $id[]=$keys->id_alternatif;
+                            
+                      ?>
+                   <td><?php echo $max ?></td>
+                    <td><?php echo $min ?></td>
+                    <td><?php echo $yi ?></td>
+                
+                    
+               
+              </tr>
+            <?php endforeach ?>
 	  	</table>
         <hr>
 	  	<h2>Ranking</h2>
@@ -52,19 +131,32 @@
 	  			<td>Alternatif</td>
 	  			<td>Optimasi</td>
 	  		</tr>
-              <?php $rank_sort = rsort($rank); 
-              $i = 1 ;foreach ($rank as $key) { ?>
-	  		<tr>
-                <td><?php echo $i; ?></td>
-	  			<td><?php echo $key['alternatif']; ?></td>
-	  			<td><?php echo $key['optimasi']; ?></td>
-	  		</tr>
-	  		<?php $i++; } ?>
+              <?php
+              
+              $a=1;for($i=0; $i<12; $i++) { 
+                //perankingan
+                rsort($optimasi);
+                $id_optimasi = array_search($optimasi[$i], $optim);
+                $id_alternatif = $id[$id_optimasi];
+                $alternatif = $this->perhitungan_model->hasil($id_alternatif);
+                //mencari alternatif terpilih
+                $optimasi_tertinggi=max($optimasi);
+                $id_optimasi2 = array_search($optimasi_tertinggi, $optim);
+                $id_alternatif2 = $id[$id_optimasi2];
+                $alternatif_terpilih=$this->perhitungan_model->hasil($id_alternatif2);
+         
+                ?>
+        <tr>
+          <td><?php echo $a; ?></td>
+          <td><?php echo  $alternatif['nama_alternatif'] ?></td>
+          <td><?php echo $optimasi[$i]; ?></td>
+        </tr>
+        <?php  $a++; } ?>
 	  	</table>
 	  	<hr>
       
 	  	<h2>Kesimpulan</h2>
-	  	<p><?php echo $perangkingan; ?></p>
+		  <h4>Hasil perhitungan menggunakan metode MOORA. Alternatif terbaik adalah  <b><?= $alternatif_terpilih['nama_alternatif']?></b> dengan jumlah <b><?= "Optimasi=".$optimasi_tertinggi ?>.</b></h4>
 	  </div>
 	</div>
 	</div>
